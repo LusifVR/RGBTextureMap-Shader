@@ -1,4 +1,4 @@
-﻿Shader "[ Prelancer Studios ]/TextureMap"
+Shader "[ Prelancer Studios ]/TextureMap"
 // Texturemap shader made by Lusif - Prelancer Studios
 // You are free to use in any project, including commerical
 // Do not sell the code or a version of it on its own.
@@ -121,14 +121,6 @@
                         float2 uvB = ApplyST(IN.uv_MainTex, _MainTexB_ST);
                         float2 uvK = ApplyST(IN.uv_MainTex, _MainTexK_ST);
 
-                        // Texture for each channel
-
-                        half3 rgbAlbedo =
-                            tex2D(_MainTexR, uvR).rgb * mask.r +
-                            tex2D(_MainTexG, uvG).rgb * mask.g +
-                            tex2D(_MainTexB, uvB).rgb * mask.b +
-                            tex2D(_MainTexK, uvK).rgb * maskK;
-
                         // Normals for each channel
 
                         half3 nR = UnpackNormal(tex2D(_NormalR, uvR)) * _NormalStrengthR;
@@ -147,11 +139,18 @@
 
                         half4 overlay = tex2D(_OverlayTex, IN.uv2_MainTex);
 
-                        rgbAlbedo = lerp(
-                            rgbAlbedo,
-                            rgbAlbedo * overlay.rgb,
-                            saturate(overlay.a * _OverlayStrength)
-                        );
+                        half3 baseAlbedo =
+                            tex2D(_MainTexR, uvR).rgb * mask.r +
+                            tex2D(_MainTexG, uvG).rgb * mask.g +
+                            tex2D(_MainTexB, uvB).rgb * mask.b +
+                            tex2D(_MainTexK, uvK).rgb * maskK;
+
+                        half3 blended = lerp(baseAlbedo, baseAlbedo * overlay.rgb, _OverlayStrength);
+
+                        half alphaMask = step(0.001, 1.0 - mask.a);
+
+                        half3 rgbAlbedo = lerp(blended, overlay.rgb, alphaMask);
+
 
                         // Smoothness Map (Could use for puddles, edge smoothed, etc)
 
