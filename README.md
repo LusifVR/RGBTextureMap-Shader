@@ -1,10 +1,7 @@
 # RGBTextureMap-Shader
 .Shader file for capturing the classic vertex painting trick used in games but with a UV map. Support for 4 tiled textures via RGB channels along with normals, a shared AO map, smoothness map, emission map, and optimized all into a GPU instanced single material.
 
-#### Red - Channel 1
-#### Green - Channel 2
-#### Blue - Channel 3
-#### Black - Channel 4
+#### Red - Channel 1 | Green - Channel 2 | Blue - Channel 3 | Black - Channel 4
 
 <img width="1002" height="790" alt="image" src="https://github.com/user-attachments/assets/4b6ea57d-a7bb-4b00-a781-145891e1f7e2" />
 
