@@ -13,6 +13,10 @@ For example, coloring damage on a brick wall.
 You can use it to create interesting and easily optimized texutre maps for meshes.
 Acting as a RGB mask directly onto the mesh where you could paint tiled textures.
 
+It also supports Emission!
+<img width="916" height="664" alt="image" src="https://github.com/user-attachments/assets/d0530ee5-7de9-4042-aa52-9a97b4e31c98" />
+
+
 Similar to how Unity's terrain paint works, you can use Blender (or another 3d software)
 to paint the colors matching to the materials, making it easy for a multi-texture material
 without having to worry about complex UVs, intense drawcalls, or any of that mess.
